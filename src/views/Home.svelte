@@ -1,21 +1,19 @@
 <script>
-	import Animation from './../components/Animation.svelte';
-	import { view } from './../stores.js';
+  import Animation from "./../components/Animation.svelte";
+  import { view } from "./../stores.js";
+
 </script>
 
 <div class="section bg">
   <Animation>
     <div class="center">
       <h2 class="white-text">Diário Analytics</h2>
-      <p class="white-text"> 
-        Diário da Região - 
-        FM Diário - 
-        Diário Imóveis</p>
-      
-      <button 
-        class="btn-large waves-effect waves-light blue darken-3" 
-        on:click={() => $view = 'login'}
-        >
+      <p class="white-text">Diário da Região - FM Diário - Diário Imóveis</p>
+
+      <button
+        class="btn-large waves-effect waves-light blue darken-3"
+        on:click={() => ($view = "login")}
+      >
         acessar
       </button>
     </div>
@@ -50,7 +48,7 @@
       background: #ad1457;
     }
     100% {
-      background: #37474f ;
+      background: #37474f;
     }
   }
 </style>
