@@ -1,8 +1,7 @@
 <script>
-  import { auth } from "./../firebase.js";
+  import { auth, db } from "./../firebase.js";
   import Animation from "./../components/Animation.svelte";
   import { view } from "./../stores.js";
-  import md5 from "md5";
 
   let email = "",
     passwd = "";
@@ -15,8 +14,23 @@
       // login do usuário
       auth
         .signInWithEmailAndPassword(email, passwd)
-        .then((result) => {
-          console.log(result.user.uid);
+        .then((res) => {
+          // id do usuário
+          const id = res.user.uid;
+
+          db.collection("users")
+            .doc(id)
+            .get()
+            .then((res) => {
+              // define as sessions
+              sessionStorage.setItem("level", res.data().level);
+              $view = "painel";
+              sessionStorage.setItem("id", id);
+              sessionStorage.setItem("view", $view);
+            })
+            .catch((err) => {
+              console.log(err);
+            });
         })
         .catch((err) => {
           M.toast({ html: "E-mail ou senha incorretos!" });
